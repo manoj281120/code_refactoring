@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='modify_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Notes</h1>
+        <form method="post">
+            <input type="text" name="note" required>
+            <button type="submit">Add Note</button>
+        </form>
+        <ul>
+            {% for index, note in enumerate(notes) %}
+                <li>
+                    <input type="checkbox" id="toggle{{ index }}" class="toggle-checkbox">
+                    <label for="toggle{{ index }}" class="note-point"></label>
+                    <span class="note-text">{{ note }}</span>
+                    <span class="actions">
+                        <a href="{{ url_for('modify', index=index) }}" class="action-icon"><i class="fas fa-edit"></i></a>
+                        <a href="{{ url_for('delete', index=index) }}" class="action-icon"><i class="fas fa-trash-alt"></i></a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>        
+    </div>
+</body>
+</html>
